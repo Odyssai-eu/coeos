@@ -1,0 +1,4366 @@
+{
+ "format": "tmb-score-table/1",
+ "updated": "2026-07-22",
+ "source": "TMB · évaluations: _rejudge/opus",
+ "axes": {
+  "creative": {
+   "label": "Créatif / fiction longue",
+   "description": "Rédaction longue de FICTION / récit créatif : nouvelle, storytelling, prose littéraire, réécriture stylistique. Pas ici si c'est un livrable business/structuré (→ redac_pro), du code (→ axes code), ou une spec/handoff (→ plan_spec)."
+  },
+  "redac_pro": {
+   "label": "Rédaction pro / business",
+   "description": "Rédaction professionnelle structurée destinée à une décision ou une communication : note de synthèse, recommandation, rapport, argumentaire COMEX, document corporate. Pas ici si c'est de la fiction (→ creative) ou une spec technique pour un exécutant (→ plan_spec)."
+  },
+  "legal_rgpd": {
+   "label": "RGPD / conformité",
+   "description": ""
+  },
+  "legal_complex": {
+   "label": "Conformité multi-jur.",
+   "description": ""
+  },
+  "reasoning": {
+   "label": "Raisonnement / logique",
+   "description": ""
+  },
+  "calc": {
+   "label": "Calcul / structuré",
+   "description": ""
+  },
+  "python": {
+   "label": "Python / scripts",
+   "description": ""
+  },
+  "code_general": {
+   "label": "Code général",
+   "description": ""
+  },
+  "debug": {
+   "label": "Debug",
+   "description": ""
+  },
+  "react": {
+   "label": "React / front",
+   "description": ""
+  },
+  "swift": {
+   "label": "Swift",
+   "description": ""
+  },
+  "refactoring": {
+   "label": "Refactoring",
+   "description": ""
+  },
+  "plan_decompo": {
+   "label": "Planning — décomposition",
+   "description": ""
+  },
+  "plan_spec": {
+   "label": "Planning — handoff / spec",
+   "description": ""
+  },
+  "plan_judgment": {
+   "label": "Planning — jugement / pièges",
+   "description": ""
+  },
+  "fast_tools": {
+   "label": "Tools & fast coding",
+   "description": ""
+  },
+  "agent_exec": {
+   "label": "Agent — exécution outillée",
+   "description": "Discipline d'exécution d'un agent outillé : bonne sélection et séquence de tools, reproduire avant de corriger, localiser par preuve, vérifier après action, cohérence multi-étapes. Pas ici si la tâche est du code pur hors boucle d'outils (→ axes code) ou du jugement de sûreté (→ agent_safety)."
+  },
+  "agent_safety": {
+   "label": "Agent — discipline / sûreté",
+   "description": "Sûreté et discipline d'un agent : rester dans le scope, s'arrêter au bon moment, refuser une action destructrice non demandée, détecter un outil qui ment, respecter le format de tool-call. Pas ici si on juge la qualité d'exécution fonctionnelle (→ agent_exec)."
+  }
+ },
+ "models": {
+  "Fusion-REF": {
+   "role": "reference",
+   "kind": "local",
+   "alias": "",
+   "or_id": "anthropic/claude-opus-4.8",
+   "served_model": "anthropic/claude-opus-4.8",
+   "cost_per_test": 0.912183,
+   "cost_estimated": false,
+   "tps_median": 22.9,
+   "out_tokens_median": 6128,
+   "verbosity_by_bench": {
+    "A": 640,
+    "C": 16136,
+    "P": 6128,
+    "T": 5756
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 98.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 97.6,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 96.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 100.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 2.8,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 84.4,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "GLM5.2 Q6": {
+   "role": "contender",
+   "kind": "local",
+   "alias": "",
+   "or_id": "",
+   "served_model": "/Volumes/models/odysseus/kernelpool/GLM-5.2-Q6",
+   "cost_per_test": null,
+   "cost_estimated": false,
+   "tps_median": 11.2,
+   "out_tokens_median": 1502,
+   "verbosity_by_bench": {
+    "A": 104,
+    "C": 4794,
+    "P": 1262,
+    "T": 1812
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 65.6,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 95.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 87.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 90.0,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 81.8,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 75.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 85.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 78.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 0.0,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 93.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 100.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "GPT 5.5-REF": {
+   "role": "reference",
+   "kind": "local",
+   "alias": "",
+   "or_id": "",
+   "served_model": "",
+   "cost_per_test": null,
+   "cost_estimated": false,
+   "tps_median": null,
+   "out_tokens_median": null,
+   "verbosity_by_bench": {},
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 88.9,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 82.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 96.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 95.9,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 95.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 87.0,
+     "n": 2,
+     "verified": true
+    },
+    "agent_exec": {
+     "score": 95.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "Hy3 - OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "tencent/hy3",
+   "served_model": "tencent/hy3-20260706",
+   "cost_per_test": 0.001373,
+   "cost_estimated": false,
+   "tps_median": 51.4,
+   "out_tokens_median": 1442,
+   "verbosity_by_bench": {
+    "A": 145,
+    "C": 4084,
+    "P": 1311,
+    "T": 1442
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 83.9,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 91.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 82.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 64.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 95.0,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 81.4,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 78.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 65.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 87.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 79.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 9.5,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 92.0,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 100.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "KIMI 2.7 OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "moonshotai/kimi-k2.7-code",
+   "served_model": "moonshotai/kimi-k2.7-code-20260612",
+   "cost_per_test": 0.046855,
+   "cost_estimated": false,
+   "tps_median": 48.4,
+   "out_tokens_median": 4794,
+   "verbosity_by_bench": {
+    "A": 757,
+    "C": 24413,
+    "P": 2974,
+    "T": 6526
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 91.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 92.1,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 90.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 82.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 8.8,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 95.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "Kimi-K3-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "moonshotai/kimi-k3",
+   "served_model": "moonshotai/kimi-k3",
+   "cost_per_test": 0.28567,
+   "cost_estimated": false,
+   "tps_median": 31.2,
+   "out_tokens_median": 10210,
+   "verbosity_by_bench": {
+    "A": 1049,
+    "C": 43236,
+    "P": 5458,
+    "T": 13835
+   },
+   "token_burner": true,
+   "verbose_benches": [
+    "C"
+   ],
+   "axes": {
+    "creative": {
+     "score": 97.8,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 97.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 97.9,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 99.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 97.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 100.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 4.7,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 100.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "Opus-4.8-OR-REF": {
+   "role": "reference",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "anthropic/claude-opus-4.8",
+   "served_model": "anthropic/claude-opus-4.8",
+   "cost_per_test": 0.140798,
+   "cost_estimated": false,
+   "tps_median": 66.8,
+   "out_tokens_median": 2678,
+   "verbosity_by_bench": {
+    "A": 263,
+    "C": 11444,
+    "P": 2305,
+    "T": 3931
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 96.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 93.4,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 88.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 98.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 13.2,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 96.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "Qwen3.7+ OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "qwen/qwen3.7-plus",
+   "served_model": "qwen/qwen3.7-plus-20260602",
+   "cost_per_test": 0.012416,
+   "cost_estimated": false,
+   "tps_median": 54.1,
+   "out_tokens_median": 4004,
+   "verbosity_by_bench": {
+    "A": 1444,
+    "C": 19457,
+    "P": 3520,
+    "T": 5580
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 67.2,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 76.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 94.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 91.4,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 85.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 78.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 96.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 10.1,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 98.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "Qwen3.7Max OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "qwen/qwen3.7-max",
+   "served_model": "qwen/qwen3.7-max-20260520",
+   "cost_per_test": 0.030129,
+   "cost_estimated": false,
+   "tps_median": 54.0,
+   "out_tokens_median": 4172,
+   "verbosity_by_bench": {
+    "A": 1742,
+    "C": 13540,
+    "P": 3068,
+    "T": 5922
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 77.8,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 95.0,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 89.0,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 93.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 85.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 78.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 84.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 10.1,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 98.8,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "RING2.6 OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "inclusionai/ring-2.6-1t",
+   "served_model": "inclusionai/ring-2.6-1t-20260508",
+   "cost_per_test": 0.009189,
+   "cost_estimated": false,
+   "tps_median": 125.5,
+   "out_tokens_median": 5035,
+   "verbosity_by_bench": {
+    "A": 502,
+    "C": 37362,
+    "P": 3582,
+    "T": 6500
+   },
+   "token_burner": true,
+   "verbose_benches": [
+    "C"
+   ],
+   "axes": {
+    "creative": {
+     "score": 77.8,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 89.2,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 77.2,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 32.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 69.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 83.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 94.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 27.0,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 98.4,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "coeos v1.3": {
+   "role": "self",
+   "kind": "local",
+   "alias": "",
+   "or_id": "kwaipilot/kat-coder-pro-v2.5",
+   "served_model": "kwaipilot/kat-coder-pro-v2.5",
+   "cost_per_test": 0.08732,
+   "cost_estimated": false,
+   "tps_median": 42.1,
+   "out_tokens_median": 3046,
+   "verbosity_by_bench": {
+    "A": 656,
+    "C": 9342,
+    "P": 2200,
+    "T": 6188
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 89.4,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 97.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 96.3,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 94.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 99.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 7.3,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 98.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "deepseek v4 flash OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "deepseek/deepseek-v4-flash",
+   "served_model": "deepseek/deepseek-v4-flash-20260423",
+   "cost_per_test": 0.0012,
+   "cost_estimated": false,
+   "tps_median": 58.2,
+   "out_tokens_median": 2034,
+   "verbosity_by_bench": {
+    "A": 446,
+    "C": 8492,
+    "P": 1993,
+    "T": 2383
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 81.7,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 84.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 34.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 94.0,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 88.0,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 87.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 82.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 68.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 76.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 11.1,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "deepseek v4 pro OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "deepseek/deepseek-v4-pro",
+   "served_model": "deepseek/deepseek-v4-pro-20260423",
+   "cost_per_test": 0.011216,
+   "cost_estimated": false,
+   "tps_median": 52.2,
+   "out_tokens_median": 4662,
+   "verbosity_by_bench": {
+    "A": 499,
+    "C": 10826,
+    "P": 3530,
+    "T": 5424
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 87.8,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 94.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 90.8,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 84.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 86.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 9.7,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 94.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "destral2 OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "mistralai/devstral-2512",
+   "served_model": "mistralai/devstral-2512",
+   "cost_per_test": 0.004617,
+   "cost_estimated": false,
+   "tps_median": 71.3,
+   "out_tokens_median": 1492,
+   "verbosity_by_bench": {
+    "A": 108,
+    "C": 4352,
+    "P": 1165,
+    "T": 1562
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 66.1,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 84.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 34.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 86.0,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 67.5,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 56.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 78.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 54.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 50.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 76.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 14.2,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 94.8,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "glm-5.1-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "z-ai/glm-5.1",
+   "served_model": "z-ai/glm-5.1",
+   "cost_per_test": 0.040589,
+   "cost_estimated": false,
+   "tps_median": 52.4,
+   "out_tokens_median": 4233,
+   "verbosity_by_bench": {
+    "A": 812,
+    "C": 27623,
+    "P": 3003,
+    "T": 5194
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 70.6,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 95.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 94.4,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 91.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 93.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 82.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 88.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 9.7,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.6,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "kat-coder-pro-v2.5-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "kwaipilot/kat-coder-pro-v2.5",
+   "served_model": "kwaipilot/kat-coder-pro-v2.5",
+   "cost_per_test": 0.016984,
+   "cost_estimated": false,
+   "tps_median": 109.1,
+   "out_tokens_median": 2681,
+   "verbosity_by_bench": {
+    "A": 509,
+    "C": 11934,
+    "P": 2086,
+    "T": 3300
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 70.0,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 95.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 56.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 92.2,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 54.8,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 91.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 24.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 36.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 87.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 23.2,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 98.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "kimi-k2.6-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "moonshotai/kimi-k2.6",
+   "served_model": "moonshotai/kimi-k2.6",
+   "cost_per_test": 0.040512,
+   "cost_estimated": false,
+   "tps_median": 42.7,
+   "out_tokens_median": 7266,
+   "verbosity_by_bench": {
+    "A": 1639,
+    "C": 26558,
+    "P": 5446,
+    "T": 7592
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 47.8,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 89.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 97.2,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 94.7,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 92.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 84.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 92.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 7.5,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 100.0,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 94.8,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "lagunaM1 OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "poolside/laguna-m.1",
+   "served_model": "poolside/laguna-m.1-20260312:free",
+   "cost_per_test": 0.0,
+   "cost_estimated": false,
+   "tps_median": 42.2,
+   "out_tokens_median": 2379,
+   "verbosity_by_bench": {
+    "A": 455,
+    "C": 7838,
+    "P": 2207,
+    "T": 3944
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 75.6,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 73.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 22.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 80.5,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 69.6,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 81.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 72.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 43.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 72.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 72.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 78.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 7.3,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 98.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 98.4,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "mercury-2-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "inception/mercury-2",
+   "served_model": "inception/mercury-2",
+   "cost_per_test": 0.0025,
+   "cost_estimated": false,
+   "tps_median": 433.9,
+   "out_tokens_median": 2664,
+   "verbosity_by_bench": {
+    "A": 390,
+    "C": 6127,
+    "P": 2274,
+    "T": 2861
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 51.7,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 82.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 48.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 84.5,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 81.7,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 74.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 69.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 81.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 100.0,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 98.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 92.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "mimo2.5 XI": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "xiaomi/mimo-v2.5-pro",
+   "served_model": "mimo-v2.5-pro",
+   "cost_per_test": 0.010253,
+   "cost_estimated": true,
+   "tps_median": 75.0,
+   "out_tokens_median": 2976,
+   "verbosity_by_bench": {
+    "A": 380,
+    "C": 28710,
+    "P": 2077,
+    "T": 4452
+   },
+   "token_burner": true,
+   "verbose_benches": [
+    "C"
+   ],
+   "axes": {
+    "creative": {
+     "score": 20.0,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 54.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 96.5,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 85.8,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 45.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 94.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 15.1,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 94.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 98.8,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "minimax2.7 MI": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "minimax/minimax-m2.7",
+   "served_model": "MiniMax-M2.7",
+   "cost_per_test": 0.007619,
+   "cost_estimated": true,
+   "tps_median": 48.4,
+   "out_tokens_median": 5228,
+   "verbosity_by_bench": {
+    "A": 822,
+    "C": 10635,
+    "P": 1890,
+    "T": 5545
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 37.2,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 97.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 91.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 95.5,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 86.1,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 81.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 85.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 72.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 97.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 8.8,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 78.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 96.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "minimax3 MI": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "minimax/minimax-m3",
+   "served_model": "MiniMax-M3",
+   "cost_per_test": 0.004194,
+   "cost_estimated": true,
+   "tps_median": 68.1,
+   "out_tokens_median": 2112,
+   "verbosity_by_bench": {
+    "A": 264,
+    "C": 7225,
+    "P": 1876,
+    "T": 2262
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 86.1,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 91.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 46.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 95.2,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 86.2,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 58.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 93.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 13.5,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 89.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "mistral L3 OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "mistralai/mistral-large-2512",
+   "served_model": "mistralai/mistral-large-2512",
+   "cost_per_test": 0.004838,
+   "cost_estimated": false,
+   "tps_median": 64.8,
+   "out_tokens_median": 2143,
+   "verbosity_by_bench": {
+    "A": 118,
+    "C": 5210,
+    "P": 2188,
+    "T": 2088
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 63.9,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 95.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 81.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 40.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 93.2,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 76.5,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 84.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 71.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 52.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 84.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 83.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 12.7,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 92.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 100.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "mistral M3.5": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "mistralai/mistral-medium-3-5",
+   "served_model": "mistralai/mistral-medium-3.5-20260430",
+   "cost_per_test": 0.02657,
+   "cost_estimated": false,
+   "tps_median": 144.9,
+   "out_tokens_median": 1782,
+   "verbosity_by_bench": {
+    "A": 82,
+    "C": 6695,
+    "P": 1756,
+    "T": 1854
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 85.6,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 85.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 32.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 83.0,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 78.2,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 72.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 65.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 78.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 86.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 31.6,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 88.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 96.8,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "nemotron3 super OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "nvidia/nemotron-3-ultra-550b-a55b",
+   "served_model": "nvidia/nemotron-3-ultra-550b-a55b-20260604:free",
+   "cost_per_test": 0.0,
+   "cost_estimated": false,
+   "tps_median": 112.5,
+   "out_tokens_median": 2716,
+   "verbosity_by_bench": {
+    "A": 322,
+    "C": 8864,
+    "P": 2042,
+    "T": 2998
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 92.2,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 95.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 92.4,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 87.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 89.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 24.0,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 92.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "o3-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "openai/o3",
+   "served_model": "openai/o3",
+   "cost_per_test": 0.020734,
+   "cost_estimated": false,
+   "tps_median": 132.8,
+   "out_tokens_median": 1618,
+   "verbosity_by_bench": {
+    "A": 356,
+    "C": 4960,
+    "P": 1618,
+    "T": 1910
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 20.0,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 95.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 84.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 93.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 75.5,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 35.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 76.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 95.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 28.8,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "qwen3.5 397 OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "qwen/qwen3.5-397b-a17b",
+   "served_model": "qwen/qwen3.5-397b-a17b-20260216",
+   "cost_per_test": 0.017822,
+   "cost_estimated": false,
+   "tps_median": 50.9,
+   "out_tokens_median": 4930,
+   "verbosity_by_bench": {
+    "A": 3636,
+    "C": 10146,
+    "P": 3125,
+    "T": 5445
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 89.4,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 91.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 75.0,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 80.8,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 73.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 84.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 89.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 9.4,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.6,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "Fable5-OR-REF": {
+   "role": "reference",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "anthropic/claude-fable-5",
+   "served_model": "anthropic/claude-fable-5",
+   "cost_per_test": 0.426014,
+   "cost_estimated": false,
+   "tps_median": 71.9,
+   "out_tokens_median": 5153,
+   "verbosity_by_bench": {
+    "A": 329,
+    "C": 17742,
+    "P": 3408,
+    "T": 5198
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 97.8,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 97.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 97.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 97.0,
+     "n": 3,
+     "verified": true
+    },
+    "code_general": {
+     "score": 96.7,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 97.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 95.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 100.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 14.4,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 92.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "Fable5-REF": {
+   "role": "reference",
+   "kind": "local",
+   "alias": "",
+   "or_id": "",
+   "served_model": "",
+   "cost_per_test": null,
+   "cost_estimated": false,
+   "tps_median": null,
+   "out_tokens_median": null,
+   "verbosity_by_bench": {},
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 97.8,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 98.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 98.2,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 97.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 95.0,
+     "n": 2,
+     "verified": true
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 98.8,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "GLM5.2-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "z-ai/glm-5.2",
+   "served_model": "z-ai/glm-5.2-20260616",
+   "cost_per_test": 0.016239,
+   "cost_estimated": false,
+   "tps_median": 41.9,
+   "out_tokens_median": 3258,
+   "verbosity_by_bench": {
+    "A": 469,
+    "C": 11558,
+    "P": 2308,
+    "T": 4786
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 83.3,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 81.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 97.0,
+     "n": 3,
+     "verified": true
+    },
+    "code_general": {
+     "score": 91.6,
+     "n": 9,
+     "verified": true
+    },
+    "debug": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 88.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 95.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 78.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 78.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 7.3,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "Nex N2 pro OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "nex-agi/nex-n2-pro",
+   "served_model": "nex-agi/nex-n2-pro",
+   "cost_per_test": 0.024067,
+   "cost_estimated": false,
+   "tps_median": 134.1,
+   "out_tokens_median": 7331,
+   "verbosity_by_bench": {
+    "A": 554,
+    "C": 49692,
+    "P": 6248,
+    "T": 13172
+   },
+   "token_burner": true,
+   "verbose_benches": [
+    "C"
+   ],
+   "axes": {
+    "creative": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 91.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 96.2,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 93.8,
+     "n": 9,
+     "verified": true
+    },
+    "debug": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 87.5,
+     "n": 2,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 88.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 29.1,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 100.0,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "Opus4.8-REF": {
+   "role": "reference",
+   "kind": "local",
+   "alias": "",
+   "or_id": "",
+   "served_model": "",
+   "cost_per_test": null,
+   "cost_estimated": false,
+   "tps_median": null,
+   "out_tokens_median": null,
+   "verbosity_by_bench": {},
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 96.8,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 97.3,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 96.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 100.0,
+     "n": 2,
+     "verified": true
+    },
+    "agent_exec": {
+     "score": 100.0,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 98.4,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "aion3 OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "aion-labs/aion-3.0",
+   "served_model": "aion-labs/aion-3.0-20260707",
+   "cost_per_test": 0.05261,
+   "cost_estimated": false,
+   "tps_median": 46.4,
+   "out_tokens_median": 6173,
+   "verbosity_by_bench": {
+    "A": 482,
+    "C": 19960,
+    "P": 2590,
+    "T": 6600
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 60.0,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 74.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 77.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 93.4,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 91.2,
+     "n": 9,
+     "verified": true
+    },
+    "debug": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 93.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 86.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 82.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 76.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 8.3,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 90.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 97.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "step3.7flash OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "stepfun/step-3.7-flash",
+   "served_model": "stepfun/step-3.7-flash-20260528",
+   "cost_per_test": 0.015667,
+   "cost_estimated": false,
+   "tps_median": 170.9,
+   "out_tokens_median": 11701,
+   "verbosity_by_bench": {
+    "A": 2438,
+    "C": 23608,
+    "P": 8870,
+    "T": 10734
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 58.3,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 91.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 94.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 88.0,
+     "n": 4,
+     "verified": true
+    },
+    "code_general": {
+     "score": 83.8,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 82.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 79.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 82.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 85.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 37.8,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 90.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 100.0,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "GPT 5.6 Sol-REF": {
+   "role": "reference",
+   "kind": "local",
+   "alias": "",
+   "or_id": "",
+   "served_model": "",
+   "cost_per_test": 0.14044,
+   "cost_estimated": false,
+   "tps_median": 53.4,
+   "out_tokens_median": 2754,
+   "verbosity_by_bench": {
+    "A": 127,
+    "C": 10530,
+    "P": 3124,
+    "T": 3400
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 88.9,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 99.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 82.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 97.3,
+     "n": 3,
+     "verified": true
+    },
+    "code_general": {
+     "score": 97.1,
+     "n": 8,
+     "verified": true
+    },
+    "debug": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_decompo": {
+     "score": 100.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_spec": {
+     "score": 98.0,
+     "n": 1,
+     "verified": true
+    },
+    "plan_judgment": {
+     "score": 96.0,
+     "n": 2,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 10.0,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 97.6,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "North-mini-code-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "cohere/north-mini-code:free",
+   "served_model": "cohere/north-mini-code:free",
+   "cost_per_test": 0.0,
+   "cost_estimated": false,
+   "tps_median": 102.8,
+   "out_tokens_median": 1924,
+   "verbosity_by_bench": {
+    "A": 520,
+    "C": 11912
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "python": {
+     "score": 84.0,
+     "n": 3,
+     "verified": true
+    },
+    "code_general": {
+     "score": 66.5,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 78.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 30.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 57.0,
+     "n": 1,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 21.7,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 78.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 68.8,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "O4-mini-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "openai/o4-mini",
+   "served_model": "openai/o4-mini",
+   "cost_per_test": 0.017666,
+   "cost_estimated": false,
+   "tps_median": 114.1,
+   "out_tokens_median": 2758,
+   "verbosity_by_bench": {
+    "A": 460,
+    "C": 5740
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "python": {
+     "score": 89.3,
+     "n": 3,
+     "verified": true
+    },
+    "code_general": {
+     "score": 76.7,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 78.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 74.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 69.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 73.0,
+     "n": 1,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 24.3,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 91.6,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "aguna-xs-2.1-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "poolside/laguna-xs-2.1",
+   "served_model": "poolside/laguna-xs-2.1",
+   "cost_per_test": 0.000694,
+   "cost_estimated": false,
+   "tps_median": 176.3,
+   "out_tokens_median": 3419,
+   "verbosity_by_bench": {
+    "A": 516,
+    "C": 9559
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "python": {
+     "score": 86.3,
+     "n": 3,
+     "verified": true
+    },
+    "code_general": {
+     "score": 76.7,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 62.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 77.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 67.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 82.0,
+     "n": 1,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 39.1,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 93.2,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "kat-coder-air-v2.5-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "kwaipilot/kat-coder-air-v2.5",
+   "served_model": "kwaipilot/kat-coder-air-v2.5",
+   "cost_per_test": 0.005867,
+   "cost_estimated": false,
+   "tps_median": 178.9,
+   "out_tokens_median": 2750,
+   "verbosity_by_bench": {
+    "A": 408,
+    "C": 13638
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "python": {
+     "score": 92.3,
+     "n": 3,
+     "verified": true
+    },
+    "code_general": {
+     "score": 77.7,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 84.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 79.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 38.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 90.0,
+     "n": 1,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 39.7,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 93.2,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 98.8,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "qwen3.6-flash-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "qwen/qwen3.6-flash",
+   "served_model": "qwen/qwen3.6-flash",
+   "cost_per_test": 0.01022,
+   "cost_estimated": false,
+   "tps_median": 136.1,
+   "out_tokens_median": 5222,
+   "verbosity_by_bench": {
+    "A": 1858,
+    "C": 12692
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "python": {
+     "score": 75.3,
+     "n": 3,
+     "verified": true
+    },
+    "code_general": {
+     "score": 74.1,
+     "n": 10,
+     "verified": true
+    },
+    "debug": {
+     "score": 80.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 88.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 64.0,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 76.0,
+     "n": 1,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 29.5,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 96.4,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 99.2,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "aion-3.0-mini-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "aion-labs/aion-3.0-mini",
+   "served_model": "aion-labs/aion-3.0-mini",
+   "cost_per_test": 0.008961,
+   "cost_estimated": false,
+   "tps_median": 65.4,
+   "out_tokens_median": 3248,
+   "verbosity_by_bench": {
+    "A": 896,
+    "C": 10974
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "python": {
+     "score": 95.3,
+     "n": 3,
+     "verified": true
+    },
+    "code_general": {
+     "score": 89.4,
+     "n": 9,
+     "verified": true
+    },
+    "debug": {
+     "score": 96.0,
+     "n": 1,
+     "verified": true
+    },
+    "react": {
+     "score": 92.0,
+     "n": 1,
+     "verified": true
+    },
+    "swift": {
+     "score": 78.5,
+     "n": 2,
+     "verified": true
+    },
+    "refactoring": {
+     "score": 86.0,
+     "n": 1,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 12.8,
+     "n": 1,
+     "verified": false
+    },
+    "agent_exec": {
+     "score": 98.8,
+     "n": 5,
+     "verified": true
+    },
+    "agent_safety": {
+     "score": 94.8,
+     "n": 5,
+     "verified": true
+    }
+   }
+  },
+  "unslopnemo-12b-OR": {
+   "role": "contender",
+   "kind": "cloud",
+   "alias": "",
+   "or_id": "thedrummer/unslopnemo-12b",
+   "served_model": "thedrummer/unslopnemo-12b",
+   "cost_per_test": 0.000741,
+   "cost_estimated": false,
+   "tps_median": 77.0,
+   "out_tokens_median": 600,
+   "verbosity_by_bench": {
+    "T": 600
+   },
+   "token_burner": false,
+   "verbose_benches": [],
+   "axes": {
+    "creative": {
+     "score": 20.0,
+     "n": 1,
+     "verified": true
+    },
+    "redac_pro": {
+     "score": 46.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_rgpd": {
+     "score": 42.0,
+     "n": 1,
+     "verified": true
+    },
+    "legal_complex": {
+     "score": 0.0,
+     "n": 1,
+     "verified": true
+    },
+    "reasoning": {
+     "score": 22.0,
+     "n": 1,
+     "verified": true
+    },
+    "calc": {
+     "score": 16.0,
+     "n": 1,
+     "verified": true
+    },
+    "python": {
+     "score": 38.0,
+     "n": 1,
+     "verified": true
+    },
+    "fast_tools": {
+     "score": 15.6,
+     "n": 1,
+     "verified": false
+    }
+   }
+  }
+ }
+}

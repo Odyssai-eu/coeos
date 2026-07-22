@@ -1,0 +1,220 @@
+{
+ "format": "coeos-agents/1",
+ "updated": "2026-07-16",
+ "provider": "odyssai",
+ "base": "http://127.0.0.1:8000/v1",
+ "router": "odyssai/CoeOS",
+ "assignment": {
+  "triage": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "plan_judgment",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "row": "CoeOS",
+   "quality": 96.5,
+   "speed": 81.0,
+   "composite": 96.5,
+   "cost": 0.023384
+  },
+  "planner": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "plan_decompo",
+   "axes": [
+    "plan_decompo",
+    "plan_spec",
+    "reasoning"
+   ],
+   "row": "CoeOS",
+   "quality": 96.0,
+   "speed": 81.0,
+   "composite": 96.0,
+   "cost": 0.023384
+  },
+  "grill": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "plan_judgment",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "row": "CoeOS",
+   "quality": 96.5,
+   "speed": 81.0,
+   "composite": 93.4,
+   "cost": 0.023384
+  },
+  "sceptique": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "debug",
+   "axes": [
+    "debug",
+    "plan_judgment"
+   ],
+   "row": "CoeOS",
+   "quality": 91.5,
+   "speed": 81.0,
+   "composite": 91.5,
+   "cost": 0.023384
+  },
+  "loop": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "plan_judgment",
+   "axes": [
+    "plan_judgment",
+    "agent_safety"
+   ],
+   "row": "CoeOS",
+   "quality": 98.5,
+   "speed": 81.0,
+   "composite": 98.5,
+   "cost": 0.023384
+  },
+  "executeur": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:step-3.7-flash",
+   "axis": "agent_exec",
+   "axes": [
+    "agent_exec",
+    "code_general"
+   ],
+   "row": "step3.7flash OR",
+   "quality": 82.4,
+   "speed": 100.0,
+   "composite": 89.4,
+   "cost": 0.015667
+  },
+  "codeos-reviewer": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "debug",
+   "axes": [
+    "debug",
+    "plan_judgment"
+   ],
+   "row": "CoeOS",
+   "quality": 91.5,
+   "speed": 81.0,
+   "composite": 91.5,
+   "cost": 0.023384
+  },
+  "codeos-debugger": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:glm-5.2",
+   "axis": "debug",
+   "axes": [
+    "debug",
+    "reasoning"
+   ],
+   "row": "GLM5.2-OR",
+   "quality": 98.0,
+   "speed": 24.5,
+   "composite": 98.0,
+   "cost": 0.016239
+  },
+  "codeos-explore": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:step-3.7-flash",
+   "axis": "code_general",
+   "axes": [
+    "code_general",
+    "fast_tools"
+   ],
+   "row": "step3.7flash OR",
+   "quality": 85.2,
+   "speed": 100.0,
+   "composite": 91.1,
+   "cost": 0.015667
+  },
+  "codeos-panel-direct": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "plan_judgment",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "row": "CoeOS",
+   "quality": 96.5,
+   "speed": 81.0,
+   "composite": 93.4,
+   "cost": 0.023384
+  },
+  "codeos-panel-alternative": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "plan_judgment",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "row": "CoeOS",
+   "quality": 96.5,
+   "speed": 81.0,
+   "composite": 93.4,
+   "cost": 0.023384
+  },
+  "codeos-panel-sceptique": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "debug",
+   "axes": [
+    "debug",
+    "plan_judgment"
+   ],
+   "row": "CoeOS",
+   "quality": 91.5,
+   "speed": 81.0,
+   "composite": 91.5,
+   "cost": 0.023384
+  },
+  "codeos-orchestrator": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "plan_judgment",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "row": "CoeOS",
+   "quality": 96.5,
+   "speed": 81.0,
+   "composite": 94.9,
+   "cost": 0.023384
+  },
+  "codeos-executor": {
+   "model": "odyssai/CoeOS",
+   "overridden": false,
+   "suggested": "odyssai/or:nex-n2-pro",
+   "axis": "code_general",
+   "axes": [
+    "code_general",
+    "instruction_following"
+   ],
+   "row": "CoeOS",
+   "quality": 84.1,
+   "speed": 81.0,
+   "composite": 83.2,
+   "cost": 0.023384
+  }
+ }
+}

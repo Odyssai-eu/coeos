@@ -1,0 +1,20 @@
+#!/bin/zsh
+# coeos-run — point d'entree du superagent CoeOS.
+#   coeos-run "ta tache"        (pipeline v2 : triage -> flow prescrit)
+#   coeos-run --json "tache"    (rapport machine)
+#
+# v2 (2026-07-15, decision Sophie "on est en train de construire, on passe
+# sur pydantic-ai") : le substrat n'est plus omp -p en sous-process, c'est
+# pydantic-ai (v2/main.py). La sortie du triage est un OBJET TYPE (plus de
+# parsing JSON manuel qui echouait quand un modele ecrivait du code au lieu
+# du JSON). Le flow reste identique : triage -> [plan] -> [grill, 1 revision
+# max] -> executeur -> [boucle sceptique]. Planchers deterministes inchanges
+# (apply_floors, memes regex qu'en v1). Seul l'executeur ecrit (structurel).
+#
+# Rollback : coeos-run.omp.bak (v1, orchestrator.py) si v2 regresse.
+# Env : COEOS_AGENTS_DIR (defaut: ~/.omp/agent/agents)
+set -e
+DIR="${0:A:h}"
+AGENTS_DIR="${COEOS_AGENTS_DIR:-$DIR/agents}"
+VENV_PY="$DIR/v2/.venv/bin/python3"
+exec "$VENV_PY" "$DIR/v2/main.py" --agents-dir "$AGENTS_DIR" "$@"

@@ -1,0 +1,154 @@
+{
+ "format": "coeos-roles/1",
+ "updated": "2026-07-16",
+ "note": "Role manifest for the CoeOS superagent. This is the ONLY source of the pipeline definition: skill axes per role, speed weight, stage. compose reads this file (no hardcoded ROLES dict). Adding a role = one entry here + its .md; no code to touch. Tools and prompt live in agents/<role>.md (OMP contract); here, only the routing + the place in the flow.",
+ "roles": {
+  "triage": {
+   "label": "Triage",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "speed_weight": 0.0,
+   "stage": "decision",
+   "writes": false,
+   "note": "FORMAT-RELIABILITY role: emits the JSON decision. A model with clean structured output comes first (manual override possible, e.g. local gemma)."
+  },
+  "planner": {
+   "label": "Planner",
+   "axes": [
+    "plan_decompo",
+    "plan_spec",
+    "reasoning"
+   ],
+   "speed_weight": 0.0,
+   "stage": "plan",
+   "writes": false
+  },
+  "grill": {
+   "label": "Grill",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "speed_weight": 0.2,
+   "stage": "review-plan",
+   "writes": false
+  },
+  "sceptique": {
+   "label": "Skeptic",
+   "axes": [
+    "debug",
+    "plan_judgment"
+   ],
+   "speed_weight": 0.0,
+   "stage": "verify",
+   "writes": false
+  },
+  "loop": {
+   "label": "Loop",
+   "axes": [
+    "plan_judgment",
+    "agent_safety"
+   ],
+   "speed_weight": 0.0,
+   "stage": "control",
+   "writes": false
+  },
+  "executeur": {
+   "label": "Executor",
+   "axes": [
+    "agent_exec",
+    "code_general"
+   ],
+   "speed_weight": 0.4,
+   "stage": "execute",
+   "writes": true,
+   "note": "ONLY role with write tools (structural). Weights speed: high call frequency."
+  },
+  "codeos-reviewer": {
+   "label": "CodeOS Reviewer",
+   "axes": [
+    "debug",
+    "plan_judgment"
+   ],
+   "speed_weight": 0.0,
+   "stage": "verify",
+   "writes": false,
+   "note": "CodeOS agent (opencode desktop fork): adversarial review of a diff. Consumed by buildCoeosConfig, not by orchestrator.py — same routing brain (score-table+pairs), interactive harness distinct from the headless superagent."
+  },
+  "codeos-debugger": {
+   "label": "CodeOS Debugger",
+   "axes": [
+    "debug",
+    "reasoning"
+   ],
+   "speed_weight": 0.0,
+   "stage": "verify",
+   "writes": false
+  },
+  "codeos-explore": {
+   "label": "CodeOS Explore",
+   "axes": [
+    "code_general",
+    "fast_tools"
+   ],
+   "speed_weight": 0.4,
+   "stage": "recon",
+   "writes": false,
+   "note": "Read-only by construction (no write tools on the CodeOS side); weights speed like the superagent executor (high call frequency)."
+  },
+  "codeos-panel-direct": {
+   "label": "CodeOS Panel — Direct",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "speed_weight": 0.2,
+   "stage": "decision",
+   "writes": false
+  },
+  "codeos-panel-alternative": {
+   "label": "CodeOS Panel — Alternative",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "speed_weight": 0.2,
+   "stage": "decision",
+   "writes": false
+  },
+  "codeos-panel-sceptique": {
+   "label": "CodeOS Panel — Skeptic",
+   "axes": [
+    "debug",
+    "plan_judgment"
+   ],
+   "speed_weight": 0.0,
+   "stage": "decision",
+   "writes": false
+  },
+  "codeos-orchestrator": {
+   "label": "CodeOS Orchestrator",
+   "axes": [
+    "plan_judgment",
+    "reasoning"
+   ],
+   "speed_weight": 0.1,
+   "stage": "decision",
+   "writes": false,
+   "note": "CodeOS CoeOS Mode (PLAN.md v2 WU3): the primary agent that plans work into the Task File and dispatches role-scoped subagents. Never edits files itself. Consumed by buildCoeosConfig, not by orchestrator.py."
+  },
+  "codeos-executor": {
+   "label": "CodeOS Executor",
+   "axes": [
+    "code_general",
+    "instruction_following"
+   ],
+   "speed_weight": 0.3,
+   "stage": "execute",
+   "writes": true,
+   "note": "CodeOS CoeOS Mode: the write-enabled subagent that implements exactly one Task File task. Reachable only through CoeOS Mode dispatch (runtime guard in TaskTool)."
+  }
+ }
+}

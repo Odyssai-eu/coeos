@@ -1,0 +1,16 @@
+services:
+  # The assignment console (:4800) — import a TMB score table, assign each
+  # role to a model from your engine's fleet, export coeos-agents.json.
+  coeos-console:
+    build: .
+    container_name: coeos-console
+    ports:
+      - "4800:4800"
+    environment:
+      # Your OpenAI-compatible engine (fleet discovery via GET /v1/models).
+      # host.docker.internal reaches an engine running on the docker host.
+      - COEOS_ENGINE_BASE=${COEOS_ENGINE_BASE:-http://host.docker.internal:8000/v1}
+    volumes:
+      # Persist the role→model assignment next to the compose file.
+      - ./:/app
+    restart: unless-stopped

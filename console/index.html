@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoeOS · Superagent console</title>
+<style>
+  :root{
+    --bg:#0e1116; --card:#161b22; --card2:#1c232d; --line:#2a323d;
+    --fg:#e6edf3; --dim:#8b949e; --accent:#4dabf7; --good:#3fb950;
+    --warn:#d29922; --bad:#f85149; --pill:#21323f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+  header{padding:20px 24px 8px}
+  h1{margin:0;font-size:20px;letter-spacing:.2px}
+  h1 small{color:var(--dim);font-weight:400;font-size:13px;margin-left:8px}
+  .sub{color:var(--dim);font-size:13px;margin-top:4px}
+  main{max-width:1000px;margin:0 auto;padding:8px 24px 96px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:16px;margin:14px 0}
+  .card-h{font-weight:600;font-size:13px;text-transform:uppercase;
+    letter-spacing:.6px;color:var(--dim);margin-bottom:10px}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-block;background:var(--card2);color:var(--fg);
+    border:1px solid var(--line);border-radius:8px;padding:8px 14px;
+    cursor:pointer;font-size:13px;user-select:none}
+  .btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent);color:#05121f;border-color:var(--accent);font-weight:600}
+  .btn.primary:hover{filter:brightness(1.08)}
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;
+    background:var(--pill);color:var(--fg)}
+  .pill.write{background:#3a2a12;color:#f0b84a}
+  .pill.read{background:#16303a;color:#63c6e0}
+  .pill.good{background:#123a1e;color:var(--good)}
+  .pill.warn{background:#3a3312;color:var(--warn)}
+  .pill.bad{background:#3a1717;color:var(--bad)}
+  .axes{color:var(--accent);font-size:12.5px}
+  .role{background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;margin:10px 0}
+  .role.overridden{border-color:var(--warn)}
+  .role-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .role-name{font-weight:600;font-size:15px}
+  .role-stage{color:var(--dim);font-size:12px}
+  .role-meta{color:var(--dim);font-size:12px;margin:2px 0 10px}
+  select{background:var(--card2);color:var(--fg);border:1px solid var(--line);
+    border-radius:8px;padding:8px 10px;font-size:13px;min-width:340px;max-width:100%;
+    font-family:ui-monospace,Menlo,monospace}
+  select:focus{outline:none;border-color:var(--accent)}
+  .sug{color:var(--dim);font-size:12px;margin-top:6px}
+  .sug b{color:var(--fg)}
+  .bar{position:fixed;bottom:0;left:0;right:0;background:#0d1117ee;
+    backdrop-filter:blur(6px);border-top:1px solid var(--line);
+    padding:12px 24px;display:flex;gap:12px;align-items:center;z-index:5}
+  .bar .inner{max-width:1000px;margin:0 auto;width:100%;display:flex;gap:12px;align-items:center}
+  #msg{color:var(--dim);font-size:13px}
+  .warn-txt{color:var(--warn)} .bad-txt{color:var(--bad)} .good-txt{color:var(--good)}
+  .empty{color:var(--dim);padding:24px 0;text-align:center}
+  code{background:#0c1017;padding:1px 5px;border-radius:5px;font-size:12px}
+  table.axes-t{width:100%;border-collapse:collapse;font-size:13px}
+  table.axes-t th{color:var(--dim);font-weight:600;font-size:11.5px;
+    text-transform:uppercase;letter-spacing:.5px;text-align:left;
+    padding:6px 10px;border-bottom:1px solid var(--line)}
+  table.axes-t td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.axes-t tr:last-child td{border-bottom:none}
+  table.axes-t .num{text-align:right;font-family:ui-monospace,Menlo,monospace;white-space:nowrap}
+  .dot{font-size:12px;margin-right:5px}
+  .dot.on{color:var(--good)} .dot.off{color:var(--dim)}
+  .alt{color:var(--dim);font-size:11.5px;margin-top:2px}
+  .axis-key{color:var(--dim);font-size:11.5px;font-family:ui-monospace,Menlo,monospace}
+  table.axes-t select{min-width:220px;width:100%;padding:6px 8px;font-size:12.5px}
+  table.axes-t tr.overridden td{background:#20180a}
+  input[type=text]{background:var(--card2);color:var(--fg);border:1px solid var(--line);
+    border-radius:8px;padding:8px 10px;font-size:13px;min-width:180px}
+  input[type=text]:focus{outline:none;border-color:var(--accent)}
+  .fc{display:flex;gap:28px;flex-wrap:wrap;align-items:baseline}
+  .fc .kpi{display:flex;flex-direction:column}
+  .fc .kpi b{font-size:22px;font-family:ui-monospace,Menlo,monospace}
+  .fc .kpi span{color:var(--dim);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+  .fc-warn{color:var(--warn);font-size:12px;margin-top:6px}
+  .status-banner{display:inline-flex;align-items:center;gap:6px;padding:3px 11px;
+    border-radius:20px;font-size:12.5px;font-weight:600}
+  .status-banner.online{background:#123a1e;color:var(--good)}
+  .status-banner.failed{background:#3a1717;color:var(--bad)}
+  .status-banner.unknown{background:var(--pill);color:var(--dim)}
+  .status-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;
+    border-radius:20px;font-size:11.5px;white-space:nowrap}
+  .status-pill.online{background:#123a1e;color:var(--good)}
+  .status-pill.failed{background:#3a1717;color:var(--bad)}
+  .status-pill.unknown{background:var(--pill);color:var(--dim)}
+  .status-detail{color:var(--bad);font-size:11px;margin-top:3px;max-width:420px}
+  table.reg-t select{min-width:230px;width:100%;padding:6px 8px;font-size:12.5px}
+  .btn.sm{padding:5px 10px;font-size:12px}
+  .tabs{display:flex;gap:4px;max-width:1000px;margin:10px auto 0;padding:0 24px;
+    flex-wrap:wrap;border-bottom:1px solid var(--line)}
+  .tab{background:transparent;color:var(--dim);border:1px solid transparent;
+    border-bottom:none;border-radius:8px 8px 0 0;padding:9px 16px;cursor:pointer;
+    font-size:13px;font-weight:600;margin-bottom:-1px}
+  .tab:hover{color:var(--fg)}
+  .tab.active{color:var(--fg);background:var(--card);border-color:var(--line);
+    border-bottom:1px solid var(--card)}
+  .panel[hidden]{display:none}
+  .role.decider{border-color:var(--accent)}
+  tr.mismatch td{background:#3a1717}
+</style>
+</head>
+<body>
+<header>
+  <h1>CoeOS <small>superagent console — role assignment</small></h1>
+  <div class="sub">Each pipeline role routes to the best model for its skill pair, from the score-table. <span id="engine"></span> <span id="coeos-status"></span></div>
+</header>
+<nav class="tabs">
+  <button class="tab active" data-tab="assign">Assignment</button>
+  <button class="tab" data-tab="criteria">Criteria · axes</button>
+  <button class="tab" data-tab="corr">Model correspondence</button>
+  <button class="tab" data-tab="logs">Logs</button>
+</nav>
+<main>
+  <div class="panel" data-panel="assign">
+    <section class="card">
+      <div class="card-h">Score-table · the data</div>
+      <div id="st-status" class="row" style="margin-bottom:12px"></div>
+      <label class="btn">Import TMB-Score-Table.json
+        <input type="file" id="file" accept=".json,application/json" hidden></label>
+    </section>
+    <div id="roles"></div>
+  </div>
+
+  <div class="panel" data-panel="criteria" hidden>
+    <section class="card" id="forecast-card" hidden>
+      <div class="card-h">Forecast · the <span id="fc-n"></span>-criteria combination</div>
+      <div class="fc" id="fc-line"></div>
+      <div class="fc-warn" id="fc-warn"></div>
+      <div class="row" style="margin-top:14px">
+        <input type="text" id="cfg-name" placeholder="settings name">
+        <button id="cfg-save" class="btn">Save settings</button>
+        <select id="cfg-list" style="min-width:200px"></select>
+        <button id="cfg-load" class="btn">Load</button>
+        <button id="cfg-del" class="btn">Delete</button>
+        <button id="cfg-reset" class="btn">Reset criteria to best</button>
+        <button id="eng-push" class="btn primary">Push to engine</button>
+      </div>
+    </section>
+
+    <section class="card" id="axes-card" hidden>
+      <div class="card-h">Criteria · <span id="axes-count"></span> axes — score-table suggests, override any axis</div>
+      <table class="axes-t">
+        <thead><tr>
+          <th>Axis</th><th style="min-width:220px">Model (OR path)</th>
+          <th class="num">Score</th><th class="num">tk/s</th>
+          <th class="num">$/1M in·out</th><th>Status</th><th title="Politique thinking / reasoning-effort par axe — injectée par le moteur (le client garde la priorité)">Thinking</th>
+        </tr></thead>
+        <tbody id="axes-body"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="panel" data-panel="corr" hidden>
+    <section class="card" id="reg-card" hidden>
+      <div class="card-h">Model correspondence · <span id="reg-count"></span> distinct models needed
+        <button id="check-all" class="btn sm" style="margin-left:10px">Check all</button>
+        <button id="refresh-fleet" class="btn sm" title="Refresh the list of models this engine currently publishes">⟳</button>
+      </div>
+      <div class="sub" style="margin-bottom:10px">Requested OR path (stable) ↔ what this engine currently publishes it as (volatile — edit when an alias shifts).</div>
+      <table class="axes-t reg-t">
+        <thead><tr>
+          <th>OR path</th><th style="min-width:230px">Published as</th>
+          <th>Status</th><th></th>
+        </tr></thead>
+        <tbody id="reg-body"></tbody>
+      </table>
+    </section>
+    <div class="empty" id="corr-empty">Import a score-table (Assignment tab) to populate the correspondence.</div>
+  </div>
+
+  <div class="panel" data-panel="logs" hidden>
+    <section class="card">
+      <div class="card-h">Routing logs · who serves which axis
+        <button id="logs-refresh" class="btn sm" style="margin-left:10px">⟳ refresh</button></div>
+      <div class="sub" style="margin-bottom:10px"><span id="logs-decider"></span> · default axis <code id="logs-default">?</code> · <span class="bad-txt">red</span> = served model ≠ its axis setting, or cold-autoload</div>
+      <table class="axes-t">
+        <thead><tr>
+          <th>Axis</th><th style="min-width:220px">Configured model</th>
+          <th style="min-width:220px">Served model</th><th class="num">Requests</th>
+        </tr></thead>
+        <tbody id="logs-body"></tbody>
+      </table>
+    </section>
+  </div>
+</main>
+
+<div class="bar"><div class="inner">
+  <button id="save" class="btn primary">Save assignment</button>
+  <button id="reset" class="btn">Reset to suggestions</button>
+  <span id="msg"></span>
+</div></div>
+
+<script>
+const $ = s => document.querySelector(s);
+let STATE = null;
+let SEL = {};      // role -> full model id choisi
+let SELAX = {};    // axis key -> logical (OR path) choisi — override du gagnant score-table
+let SELREG = {};   // logical (OR path) -> full endpoint choisi (correspondence table)
+let SELTHINK = {}; // axis key -> thinking ('on'|'off'|'') — politique par axe (B)
+let SELEFF = {};   // axis key -> reasoning_effort ('low'|'medium'|'high'|'xhigh'|'')
+
+// Le logique EFFECTIF d'un axe : override operateur (SELAX) sinon le
+// gagnant du score-table. Reintroduit 2026-07-17 (Sophie, corrigeant sa
+// propre demande de la veille) : les criteres redeviennent editables.
+function axisChosenLogical(ax){
+  if(SELAX[ax.key] !== undefined) return SELAX[ax.key];
+  return ax.best ? ax.best.logical : null;
+}
+function fullId(s, bare){
+  if(!bare) return '';
+  return bare.includes('/') ? bare : `${s.provider}/${bare}`;
+}
+// La table de correspondance = l'UNION des logiques REELLEMENT choisis par
+// les 18 axes (defaut ou override), dedupliques. Calculee cote client (pas
+// s.registry, qui ne connait que les gagnants par defaut du serveur) pour
+// qu'un override se reflete a l'instant sans aller-retour reseau. saved
+// (s.engine_registry) = mapping deja pousse au moteur ; sinon, un guess par
+// defaut (premier id live joint a la meme ligne de bench).
+function computeRegistry(s){
+  const seen = new Map();
+  for(const ax of s.axis_table){
+    const chosen = axisChosenLogical(ax);
+    if(!chosen || seen.has(chosen)) continue;
+    const cand = (ax.candidates||[]).find(c=>c.logical===chosen);
+    const provRow = cand ? cand.row : (ax.best ? ax.best.row : '');
+    const saved = (s.engine_registry||{})[chosen];
+    const mapped = !!(saved && saved.endpoint);
+    let endpoint = '';
+    if(mapped) endpoint = fullId(s, saved.endpoint);
+    else {
+      // guess par LOGIQUE d'abord (l'id publie dont la ligne jointe porte
+      // ce meme OR path), la provenance en repli — la ligne qui a GAGNE
+      // l'axe peut n'etre jointe par aucun id (ex. Coeos-agent-01, ligne
+      // de bench agent locale, alors que l'endpoint est or13:nex-n2-pro).
+      const guess = (s.servable||[]).find(c=>c.logical===chosen)
+                 || (s.servable||[]).find(c=>c.row===provRow);
+      endpoint = guess ? guess.full : '';
+    }
+    // etiquette = la ligne de bench de l'ENDPOINT joint (l'identite du
+    // modele : "Nex N2 pro OR"), pas la ligne d'ou vient le score
+    // (provenance "Coeos-agent-01") — Sophie 2026-07-17 : "or13:nex-n2-pro
+    // = Nex N2 Pro, comme les autres".
+    const epRow = (s.servable||[]).find(c=>c.full===endpoint);
+    seen.set(chosen, {logical: chosen, row: (epRow && epRow.row) || provRow,
+                      endpoint, mapped});
+  }
+  return [...seen.values()];
+}
+
+async function getState(){
+  const r = await fetch('/api/state'); return r.json();
+}
+function fmtCost(c){ return (c===null||c===undefined) ? '—' : ('$'+Number(c).toFixed(4)); }
+function fmtPrice(c){
+  if(!c || c.price_in==null) return '—';
+  return `$${c.price_in.toFixed(2)} · $${c.price_out.toFixed(2)}`;
+}
+function statusPill(status){
+  const map = {online:'● CoeOS online', failed:'✕ CoeOS failed',
+    unmapped:'✕ unmapped — no live candidate', unknown:'? unchecked'};
+  return `<span class="status-pill ${status==='unmapped'?'failed':status}">${map[status]||status}</span>`;
+}
+// Statut de l'endpoint COURANT (le picker, meme non pousse), pas celui que
+// le moteur a persiste — sinon un Check sans Push prealable semble ne rien
+// faire (2026-07-17, Sophie : "il ne veut pas le mapper"). status_cache est
+// tenu par endpoint plein (odyssai/...), pas par logique.
+function regStatus(s, r){
+  if(!r) return {status:'unknown', detail:'', checked_at:''};
+  const chosen = SELREG[r.logical] !== undefined ? SELREG[r.logical] : r.endpoint;
+  if(!chosen) return {status:'unmapped', detail:'', checked_at:''};
+  const c = (s.status_cache||{})[chosen];
+  return c ? {status:c.status, detail:c.detail||'', checked_at:c.checked_at||''}
+           : {status:'unknown', detail:'', checked_at:''};
+}
+function computeCoeosStatus(s){
+  const reg = computeRegistry(s);
+  let nOnline=0, nFailed=0, nTotal=0;
+  for(const r of reg){
+    nTotal++;
+    const st = regStatus(s, r).status;
+    if(st==='online') nOnline++;
+    else if(st==='failed' || st==='unmapped') nFailed++;
+  }
+  return {status: nFailed ? 'failed' : (nTotal && nOnline===nTotal ? 'online' : 'unknown'),
+          n_online:nOnline, n_failed:nFailed, n_total:nTotal};
+}
+
+// Criteria = score-table suggestion by default, operator-overridable
+// (2026-07-17). Forecast reflects whatever's CHOSEN right now (default or
+// override), not just the raw score-table winners.
+function forecast(s){
+  const reg = computeRegistry(s);
+  const byLogical = {}; for(const r of reg) byLogical[r.logical] = r;
+  let pin=0, pout=0, nP=0, nOnline=0, nTotal=0;
+  for(const ax of s.axis_table){
+    const chosen = axisChosenLogical(ax); if(!chosen) continue;
+    nTotal++;
+    if(regStatus(s, byLogical[chosen]).status === 'online') nOnline++;
+    const cand = (ax.candidates||[]).find(c=>c.logical===chosen) || ax.best;
+    if(cand && cand.price_in!=null){ pin += cand.price_in; pout += cand.price_out; nP++; }
+  }
+  return {
+    efficiency: nTotal ? Math.round(1000*nOnline/nTotal)/10 : null,
+    price_in:  nP ? Math.round(100*pin/nP)/100 : null,
+    price_out: nP ? Math.round(100*pout/nP)/100 : null,
+    n_axes: s.axis_table.length, n_online: nOnline, n_total: nTotal,
+  };
+}
+
+function renderForecast(s){
+  const f = forecast(s);
+  $('#fc-n').textContent = f.n_axes;
+  $('#fc-line').innerHTML = `
+    <div class="kpi"><b>${f.efficiency!=null ? f.efficiency+' %' : '—'}</b>
+      <span>criteria actually reachable</span></div>
+    <div class="kpi"><b>${f.price_in!=null ? '$'+f.price_in.toFixed(2) : '—'}</b>
+      <span>avg price 1M in</span></div>
+    <div class="kpi"><b>${f.price_out!=null ? '$'+f.price_out.toFixed(2) : '—'}</b>
+      <span>avg price 1M out</span></div>`;
+  $('#fc-warn').textContent = f.n_total && f.n_online < f.n_total
+    ? `${f.n_total - f.n_online} criteria not confirmed online — check the correspondence table below`
+    : '';
+}
+
+function renderCoeosStatus(s){
+  const el = $('#coeos-status');
+  const c = computeCoeosStatus(s);
+  const label = c.status === 'online' ? `● CoeOS online (${c.n_online}/${c.n_total})`
+    : c.status === 'failed' ? `✕ CoeOS failed (${c.n_failed}/${c.n_total} mapping(s) down)`
+    : `? CoeOS status unknown — click Check all`;
+  el.innerHTML = `· <span class="status-banner ${c.status}">${label}</span>`;
+}
+
+function renderConfigs(s){
+  const list = $('#cfg-list');
+  const cur = list.value;
+  list.innerHTML = (s.configs||[]).length
+    ? s.configs.map(c=>`<option value="${c.slug}">${c.name} · ${(c.saved||'').slice(0,16)}${c.n_mapped?` · ${c.n_mapped} mapped`:''}</option>`).join('')
+    : '<option value="">no saved settings</option>';
+  if(cur && [...list.options].some(o=>o.value===cur)) list.value = cur;
+}
+
+function optLabel(c, suggested){
+  const tag = suggested ? '  ★ suggested' : '';
+  if(!c.scored) return `${c.full}   ·  not benched (manual assignment)`;
+  return `${c.full}   ·  Q${c.quality} V${c.speed} → ${c.composite}  ·  ${fmtCost(c.cost)}${tag}`;
+}
+
+function render(){
+  const s = STATE;
+  // moteur
+  const eng = $('#engine');
+  if(s.engine_error){ eng.innerHTML = `<span class="bad-txt">engine unreachable (${s.base})</span>`; }
+  else {
+    const rt = s.router ? ` · router <code>${s.router}</code>` : ' · <span class="warn-txt">no router published</span>';
+    eng.innerHTML = `<span class="good-txt">${s.n_servable} servable models</span> · <code>${s.base}</code>${rt}`;
+  }
+
+  // score-table status
+  const st = $('#st-status');
+  if(!s.score_table){
+    st.innerHTML = `<span class="warn-txt">No score-table imported.</span> Import <code>TMB-Score-Table.json</code> to get started.`;
+  } else {
+    const t = s.score_table;
+    let unj = t.unjoined && t.unjoined.length
+      ? ` · <span class="warn-txt">${t.unjoined.length} unjoined servable(s)</span>` : '';
+    st.innerHTML = `<span class="pill good">loaded</span>
+      <span>updated ${t.updated||'?'} · ${t.n_models} models · ${t.n_axes} axes ·
+      <b>${t.n_joined}</b> joined to the fleet${unj}</span>`;
+  }
+
+  renderCoeosStatus(s);
+
+  // criteres — une ligne par axe de la score-table (dynamique). Le
+  // score-table SUGGERE (★ best), l'operateur peut forcer un autre modele
+  // scoré sur cet axe (2026-07-17, retour arriere assume par Sophie sur sa
+  // propre demande de la veille). La table de correspondance ci-dessous
+  // suit automatiquement tout override.
+  const axCard = $('#axes-card'), fcCard = $('#forecast-card'), regCard = $('#reg-card');
+  const registry = computeRegistry(s);
+  const byLogical = {}; for(const r of registry) byLogical[r.logical] = r;
+  if(s.axis_table && s.axis_table.length){
+    axCard.hidden = false; fcCard.hidden = false;
+    $('#axes-count').textContent = s.axis_table.length;
+    const tb = $('#axes-body'); tb.innerHTML = '';
+    for(const ax of s.axis_table){
+      const b = ax.best;
+      const tr = document.createElement('tr');
+      if(!b){
+        tr.innerHTML = `<td>${ax.label}<div class="axis-key">${ax.key}</div></td>
+          <td colspan="5" class="warn-txt">no model scored on this axis</td>`;
+        tb.appendChild(tr); continue;
+      }
+      const chosen = axisChosenLogical(ax);
+      const isOverride = chosen !== b.logical;
+      // deduplique par logique (une ligne de bench peut publier sous
+      // plusieurs alias servables — un seul choix par modele) ; garde le
+      // meilleur score par logique.
+      const byLog = new Map();
+      for(const c of (ax.candidates||[])){
+        if(!c.logical) continue;
+        if(!byLog.has(c.logical)) byLog.set(c.logical, c);
+      }
+      let opts = '';
+      for(const c of byLog.values()){
+        const star = c.logical===b.logical ? '  ★ best' : '';
+        const ver = !c.verified ? ' ~' : '';
+        opts += `<option value="${c.logical}" ${c.logical===chosen?'selected':''}>${c.row}  ·  ${c.score}${ver}${c.tps!=null?' · '+c.tps+' tk/s':''}${c.token_burner?' 🔴 burner':''}${star}</option>`;
+      }
+      const cur = byLog.get(chosen);
+      const rowLabel = cur ? cur.row : b.row;
+      const score = cur ? cur.score : b.score;
+      const tps = cur ? cur.tps : b.tps;
+      const price = cur || b;
+      const resetBtn = isOverride
+        ? `<button class="btn sm ax-reset" data-axis="${ax.key}" title="reset to ★ best (${b.row})">↺</button>` : '';
+      tr.className = isOverride ? 'overridden' : '';
+      // politique thinking/effort par axe : override local (SEL*) sinon la
+      // valeur posée dans le moteur (ax.thinking / ax.reasoning_effort).
+      const curThink = SELTHINK[ax.key] !== undefined ? SELTHINK[ax.key]
+        : (ax.thinking===true ? 'on' : ax.thinking===false ? 'off' : '');
+      const curEff = SELEFF[ax.key] !== undefined ? SELEFF[ax.key] : (ax.reasoning_effort||'');
+      const effOpt = (v,l)=>`<option value="${v}" ${curEff===v?'selected':''}>${l}</option>`;
+      tr.innerHTML = `
+        <td>${ax.label}<div class="axis-key">${ax.key}</div></td>
+        <td><select class="ax-model" data-axis="${ax.key}">${opts}</select>
+          <div class="axis-key mono">${chosen}</div></td>
+        <td class="num">${score}</td>
+        <td class="num">${tps!=null ? tps : '—'}</td>
+        <td class="num">${fmtPrice(price)}</td>
+        <td>${statusPill(regStatus(s, byLogical[chosen]).status)}${cur && cur.token_burner ? ` <span class="pill bad" title="token burner — verbeux sur ${(cur.verbose_benches||[]).join(', ')}, coûte tokens+latence (le score qualité ne le pénalise pas)">🔴 burner</span>` : ''} ${resetBtn}</td>
+        <td><select class="ax-think" data-axis="${ax.key}" style="min-width:62px">
+            <option value="" ${curThink===''?'selected':''}>think —</option>
+            <option value="on" ${curThink==='on'?'selected':''}>on</option>
+            <option value="off" ${curThink==='off'?'selected':''}>off</option>
+          </select>
+          <select class="ax-eff" data-axis="${ax.key}" style="min-width:62px">
+            <option value="" ${!curEff?'selected':''}>eff —</option>
+            ${effOpt('low','low')}${effOpt('medium','medium')}${effOpt('high','high')}${effOpt('xhigh','xhigh')}
+          </select></td>`;
+      tb.appendChild(tr);
+    }
+    tb.querySelectorAll('.ax-model').forEach(sel=>{
+      sel.onchange = e=>{ SELAX[e.target.dataset.axis] = e.target.value; render(); };
+    });
+    tb.querySelectorAll('.ax-think').forEach(sel=>{
+      sel.onchange = e=>{ SELTHINK[e.target.dataset.axis] = e.target.value; };
+    });
+    tb.querySelectorAll('.ax-eff').forEach(sel=>{
+      sel.onchange = e=>{ SELEFF[e.target.dataset.axis] = e.target.value; };
+    });
+    tb.querySelectorAll('.ax-reset').forEach(btn=>{
+      btn.onclick = ()=>{ delete SELAX[btn.dataset.axis]; render(); };
+    });
+    renderForecast(s);
+    renderConfigs(s);
+  } else { axCard.hidden = true; fcCard.hidden = true; }
+
+  // table de correspondance — OR path (stable) <-> endpoint publie
+  // (volatil, EDITABLE). Une ligne par logique distinct REELLEMENT choisi
+  // par les criteres (defaut ou override) ; statut = dernier sondage reel.
+  const corrEmpty = $('#corr-empty'); if(corrEmpty) corrEmpty.hidden = registry.length>0;
+  if(registry.length){
+    regCard.hidden = false;
+    $('#reg-count').textContent = registry.length;
+    const tb = $('#reg-body'); tb.innerHTML = '';
+    const servable = s.servable || [];
+    for(const r of registry){
+      if(SELREG[r.logical]===undefined) SELREG[r.logical] = r.endpoint;
+      const chosen = SELREG[r.logical];
+      let opts = '<option value="">— unmapped —</option>';
+      for(const c of servable){
+        // le nom de la ligne que join() attribue a CET id (jointure par
+        // upstream/kind, metadonnee — corrigee 2026-07-17, plus de vol de
+        // ligne par or_id partage : or13:nex-n2-pro lit "Nex N2 pro OR").
+        const lab = c.row ? `${c.full}  ·  ${c.row}` : c.full;
+        opts += `<option value="${c.full}" ${c.full===chosen?'selected':''}>${lab}</option>`;
+      }
+      if(chosen && !servable.some(c=>c.full===chosen)){
+        opts = `<option value="${chosen}" selected>${chosen}  ·  (not in current fleet)</option>` + opts;
+      }
+      const rs = regStatus(s, r);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="mono">${r.logical}<div class="axis-key">${r.row}</div></td>
+        <td><select data-logical="${r.logical}">${opts}</select></td>
+        <td>${statusPill(rs.status)}${rs.detail?`<div class="status-detail">${rs.detail}</div>`:''}
+          ${rs.checked_at?`<div class="axis-key">checked ${rs.checked_at.slice(11,16)}</div>`:''}</td>
+        <td><button class="btn sm check-one" data-logical="${r.logical}">Check</button></td>`;
+      tb.appendChild(tr);
+    }
+    tb.querySelectorAll('select').forEach(sel=>{
+      sel.onchange = e=>{ SELREG[e.target.dataset.logical] = e.target.value; render(); };
+    });
+    tb.querySelectorAll('.check-one').forEach(btn=>{
+      btn.onclick = ()=> checkEndpoints([SELREG[btn.dataset.logical]].filter(Boolean));
+    });
+  } else { regCard.hidden = true; }
+
+  // roles
+  const box = $('#roles'); box.innerHTML = '';
+  if(!s.score_table){ box.innerHTML = '<div class="empty">Roles will appear once a score-table is imported.</div>'; return; }
+
+  renderDecider(s, box);   // le decider en premiere position, comme un agent
+
+  const routerFull = s.router ? `${s.provider}/${s.router}` : null;
+  for(const [role, r] of Object.entries(s.roles)){
+    const asg = s.assignment[role] || {};
+    const sug = r.suggested;
+    // selection courante : affectation enregistrée (routeur ou override) >
+    // selection locale > suggestion
+    if(SEL[role]===undefined){
+      SEL[role] = asg.model || (routerFull || (sug ? sug.full : ''));
+    }
+    const chosen = SEL[role];
+    // le routeur n'est pas un override : c'est le défaut de l'étape 6
+    const isOverride = chosen && chosen !== routerFull && (sug ? chosen !== sug.full : true);
+
+    const card = document.createElement('div');
+    card.className = 'role' + (isOverride ? ' overridden':'');
+    const wpill = r.writes ? '<span class="pill write">✎ writes</span>' : '<span class="pill read">read-only</span>';
+    const axes = (r.axes||[]).join(' + ');
+    const sw = r.speed_weight ? ` · speed weight ${r.speed_weight}` : '';
+
+    let opts = '';
+    if(routerFull){
+      const hint = (r.axes||[])[0] || '?';
+      opts += `<option value="${routerFull}" ${routerFull===chosen?'selected':''}>${routerFull}   ·  router — routes by axis (x-coeos-axis: ${hint})</option>`;
+    }
+    if(r.candidates.length){
+      for(const c of r.candidates){
+        const isSug = sug && c.full===sug.full;
+        opts += `<option value="${c.full}" ${c.full===chosen?'selected':''}>${optLabel(c,isSug)}</option>`;
+      }
+    } else if(!routerFull) {
+      opts = `<option value="">no servable candidate for this pair</option>`;
+    }
+    // si l'assignation pointe un modele hors flotte courante, garde-le visible
+    if(chosen && chosen!==routerFull && !r.candidates.some(c=>c.full===chosen)){
+      opts = `<option value="${chosen}" selected>${chosen}  ·  (not in current fleet)</option>` + opts;
+    }
+
+    let sugLine = sug
+      ? `suggested: <b>${sug.full}</b> · quality ${sug.quality} / speed ${sug.speed} → composite ${sug.composite} · ${fmtCost(sug.cost)} <span class="axes">(${(r.axes||[]).join('+')})</span>`
+      : `<span class="warn-txt">no suggestion — no servable candidate covering ${axes}</span>`;
+    if(isOverride) sugLine += ` &nbsp; <span class="pill warn">manual override</span>`;
+    if(chosen === routerFull){
+      const hint = (r.axes||[])[0] || '?';
+      const hb = (s.axis_table||[]).find(x=>x.key===hint);
+      const hc = hb && hb.best;
+      sugLine += `<br>routed by the engine (<span class="mono">x-coeos-axis: ${hint}</span>)`
+        + (hc ? ` → criterion: <b>${hc.row||hc.logical}</b> · <b>${hc.tps!=null?hc.tps+' tk/s':'—'}</b>` : '');
+    } else {
+      const curC = r.candidates.find(c=>c.full===chosen);
+      sugLine += `<br>selected model speed: <b>${curC && curC.tps!=null ? curC.tps+' tk/s' : '—'}</b>`;
+    }
+
+    card.innerHTML = `
+      <div class="role-top">
+        <span class="role-name">${r.label}</span>
+        <span class="role-stage">${r.stage}</span>
+        ${wpill}
+        <span class="axes">${axes}${sw}</span>
+      </div>
+      <div class="role-meta">tools: ${r.tools.length? r.tools.map(t=>`<code>${t}</code>`).join(' '):'—'}${r.note? ' · '+r.note:''}</div>
+      <select data-role="${role}">${opts}</select>
+      <div class="sug">${sugLine}</div>`;
+    box.appendChild(card);
+  }
+  box.querySelectorAll('select').forEach(sel=>{
+    sel.onchange = e=>{ SEL[e.target.dataset.role] = e.target.value; render(); };
+  });
+}
+
+async function refresh(){ STATE = await getState(); render(); }
+
+async function checkEndpoints(endpoints){
+  endpoints = [...new Set(endpoints)].filter(Boolean);
+  if(!endpoints.length) return;
+  $('#msg').textContent = `checking ${endpoints.length} endpoint(s)…`;
+  const r = await fetch('/api/registry/check',{method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({endpoints})});
+  const j = await r.json();
+  if(j.error){ $('#msg').innerHTML = `<span class="bad-txt">${j.error}</span>`; return; }
+  const nFail = Object.values(j.checked||{}).filter(v=>v.status==='failed').length;
+  $('#msg').innerHTML = nFail
+    ? `<span class="bad-txt">${nFail}/${endpoints.length} endpoint(s) failed</span>`
+    : `<span class="good-txt">${endpoints.length} endpoint(s) online</span>`;
+  await refresh();
+}
+
+$('#file').onchange = async e=>{
+  const f = e.target.files[0]; if(!f) return;
+  $('#msg').textContent = 'importing…';
+  const text = await f.text();
+  const r = await fetch('/api/score-table',{method:'POST',body:text});
+  const j = await r.json();
+  if(j.error){ $('#msg').innerHTML = `<span class="bad-txt">${j.error}</span>`; return; }
+  $('#msg').innerHTML = `<span class="good-txt">score-table imported (${j.n_models} models)</span>`;
+  SEL = {}; SELAX = {}; SELREG = {}; await refresh();
+};
+
+$('#save').onclick = async ()=>{
+  const overrides = {};
+  for(const [role, r] of Object.entries(STATE.roles)){
+    const sug = r.suggested; const chosen = SEL[role];
+    if(chosen && (!sug || chosen !== sug.full)) overrides[role] = chosen;
+  }
+  $('#msg').textContent = 'saving…';
+  const res = await fetch('/api/assign',{method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({overrides})});
+  const j = await res.json();
+  if(j.error){ $('#msg').innerHTML = `<span class="bad-txt">${j.error}</span>`; return; }
+  const n = Object.keys(overrides).length;
+  $('#msg').innerHTML = `<span class="good-txt">assignment written → coeos-agents.json</span> · ${n} override(s)`;
+  SEL = {}; await refresh();
+};
+
+// --- custom settings (criteria overrides + correspondence mapping) ---
+$('#cfg-save').onclick = async ()=>{
+  const name = $('#cfg-name').value.trim();
+  if(!name){ $('#msg').innerHTML = '<span class="warn-txt">give the settings a name</span>'; return; }
+  const f = forecast(STATE);
+  const axes = {};
+  for(const ax of STATE.axis_table){
+    const chosen = axisChosenLogical(ax); if(chosen) axes[ax.key] = chosen;
+  }
+  const registry = {};
+  for(const r of computeRegistry(STATE)) registry[r.logical] = SELREG[r.logical] || r.endpoint || '';
+  const res = await fetch('/api/configs/save',{method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name, axes, registry, forecast:f})});
+  const j = await res.json();
+  if(j.error){ $('#msg').innerHTML = `<span class="bad-txt">${j.error}</span>`; return; }
+  STATE.configs = j.configs; renderConfigs(STATE);
+  $('#cfg-list').value = j.slug;
+  $('#msg').innerHTML = `<span class="good-txt">settings “${name}” saved</span>`;
+};
+
+$('#cfg-load').onclick = async ()=>{
+  const s = $('#cfg-list').value;
+  if(!s){ $('#msg').innerHTML = '<span class="warn-txt">no settings to load</span>'; return; }
+  const r = await fetch('/api/configs/load',{method:'POST',
+    headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:s})});
+  const j = await r.json();
+  if(j.error){ $('#msg').innerHTML = `<span class="bad-txt">${j.error}</span>`; return; }
+  SELAX = {}; SELREG = {};
+  for(const [key, logical] of Object.entries(j.axes||{})){
+    if(logical) SELAX[key] = logical;
+  }
+  let missing = 0;
+  for(const [logical, endpoint] of Object.entries(j.registry||{})){
+    if(!endpoint) continue;
+    SELREG[logical] = endpoint;
+    if(!(STATE.servable||[]).some(c=>c.full===endpoint)) missing++;
+  }
+  $('#cfg-name').value = j.name || '';
+  render();
+  $('#msg').innerHTML = `<span class="good-txt">settings “${j.name}” loaded</span>`
+    + (missing ? ` · <span class="warn-txt">${missing} endpoint(s) not in current fleet</span>` : '');
+};
+
+$('#cfg-del').onclick = async ()=>{
+  const s = $('#cfg-list').value;
+  if(!s){ $('#msg').innerHTML = '<span class="warn-txt">no settings to delete</span>'; return; }
+  const r = await fetch('/api/configs/delete',{method:'POST',
+    headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:s})});
+  const j = await r.json();
+  if(j.error){ $('#msg').innerHTML = `<span class="bad-txt">${j.error}</span>`; return; }
+  STATE.configs = j.configs; renderConfigs(STATE);
+  $('#msg').innerHTML = `<span class="good-txt">settings deleted</span>`;
+};
+
+$('#cfg-reset').onclick = ()=>{
+  SELAX = {}; render();
+  $('#msg').innerHTML = '<span class="good-txt">criteria reset to score-table best</span>';
+};
+
+$('#check-all').onclick = ()=>{
+  const eps = computeRegistry(STATE).map(r=>SELREG[r.logical]||r.endpoint).filter(Boolean);
+  checkEndpoints(eps);
+};
+
+// Le moteur peut changer sa flotte a tout moment (alias OR volatils) — ce
+// bouton relit /v1/models tout de suite au lieu d'attendre une autre
+// action pour rafraichir les options du picker "Published as".
+$('#refresh-fleet').onclick = async ()=>{
+  $('#msg').textContent = 'refreshing model list…';
+  await refresh();
+  $('#msg').innerHTML = `<span class="good-txt">${STATE.n_servable} models</span>`;
+};
+
+$('#eng-push').onclick = async ()=>{
+  const axes = {};
+  for(const ax of STATE.axis_table){
+    const chosen = axisChosenLogical(ax);
+    if(!chosen) continue;
+    // politique thinking/effort par axe : envoyée seulement si réglée ('' = —
+    // → le serveur préserve la valeur déjà dans le moteur).
+    const think = SELTHINK[ax.key] !== undefined ? SELTHINK[ax.key]
+      : (ax.thinking===true ? 'on' : ax.thinking===false ? 'off' : '');
+    const eff = SELEFF[ax.key] !== undefined ? SELEFF[ax.key] : (ax.reasoning_effort||'');
+    axes[ax.key] = {label: ax.label, logical: chosen,
+      ...(think==='on' ? {thinking:true} : think==='off' ? {thinking:false} : {}),
+      ...(eff ? {reasoning_effort:eff} : {})};
+  }
+  const registry = {};
+  for(const r of computeRegistry(STATE)) registry[r.logical] = SELREG[r.logical] || r.endpoint || '';
+  const name = $('#cfg-name').value.trim();
+  $('#msg').textContent = 'pushing to engine…';
+  const r = await fetch('/api/engine/push',{method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({axes, registry, name: name || undefined})});
+  const j = await r.json();
+  if(j.error){ $('#msg').innerHTML = `<span class="bad-txt">${j.error}</span>`; return; }
+  $('#msg').innerHTML = `<span class="good-txt">engine updated</span> · ${j.n_axes} axes · ${j.n_registry} mapped ·
+    default <code>${j.default_axis}</code> · router <code>${j.router||'—'}</code> · ${j.engine}`;
+  await refresh();
+  // verifie tout de suite que ca marche vraiment — pas d'attente pour
+  // decouvrir un mapping casse (l'incident du 2026-07-16)
+  await checkEndpoints(Object.values(registry));
+};
+
+$('#reset').onclick = async ()=>{
+  $('#msg').textContent = 'regenerating…';
+  const res = await fetch('/api/assign',{method:'POST',
+    headers:{'Content-Type':'application/json'},body:JSON.stringify({overrides:{}})});
+  const j = await res.json();
+  if(j.error){ $('#msg').innerHTML = `<span class="bad-txt">${j.error}</span>`; return; }
+  $('#msg').innerHTML = `<span class="good-txt">roles reset to suggestions</span>`;
+  SEL = {}; await refresh();
+};
+
+// --- decider : classifieur d'axe du moteur, presente comme un agent, en tete ---
+function renderDecider(s, box){
+  const cur = s.decider || '';
+  const ids = (s.servable||[]).map(c=>c.id);
+  let opts = `<option value="" ${cur?'':'selected'}>— none (every request falls to default_axis) —</option>`;
+  if(cur && !ids.includes(cur))
+    opts += `<option value="${cur}" selected>${cur}  ·  (not in current fleet)</option>`;
+  for(const c of (s.servable||[])){
+    const kind = /^or/i.test(c.id) ? 'cloud/OR' : 'local';
+    opts += `<option value="${c.id}" ${c.id===cur?'selected':''}>${c.id}  ·  ${kind}</option>`;
+  }
+  const nAx = s.axis_table ? s.axis_table.length : 0;
+  const card = document.createElement('div');
+  card.className = 'role decider';
+  card.innerHTML = `
+    <div class="role-top">
+      <span class="role-name">Decider</span>
+      <span class="role-stage">routing classifier</span>
+      <span class="pill">engine setting</span>
+      <span class="axes">classifies every request into one of the ${nAx} axes</span>
+    </div>
+    <div class="role-meta">The model the engine calls to read each request and pick its skill axis
+      (<code>x-coeos-axis</code>). Local or cloud/OR both work (engine ≥ 1.17.2).</div>
+    <select id="decider-sel">${opts}</select>
+    <div class="sug">current: <b>${cur||'— none —'}</b>${cur?'':' · <span class="warn-txt">no decider → every request falls to default_axis</span>'}</div>`;
+  box.appendChild(card);
+  card.querySelector('#decider-sel').onchange = async e=>{
+    const model = e.target.value;
+    $('#msg').textContent = 'setting decider…';
+    const r = await fetch('/api/engine/decider',{method:'POST',
+      headers:{'Content-Type':'application/json'},body:JSON.stringify({model})});
+    const j = await r.json();
+    if(j.error){ $('#msg').innerHTML = `<span class="bad-txt">${j.error}</span>`; return; }
+    $('#msg').innerHTML = `<span class="good-txt">decider set to ${j.decider||'— none —'}</span>`;
+    await refresh();
+  };
+}
+
+// --- tabs ---
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+  document.querySelectorAll('.panel').forEach(p=>p.hidden = (p.dataset.panel!==name));
+  if(name==='logs') loadLogs();
+}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>switchTab(t.dataset.tab));
+
+// --- logs : compteurs de routage reels (agrege), rouge sur mismatch/fallback ---
+// Normalise un id vers son coeur de modele : enleve le prefixe provider
+// (z-ai/…), le prefixe d'alias moteur (or02:…) ET l'index numerique d'alias
+// (or:10-aion-3.0-mini -> aion-3.0-mini) — sinon le binding LOGIQUE
+// (aion-labs/aion-3.0-mini) et l'endpoint SERVI (or:10-aion-3.0-mini) sont vus
+// comme differents et l'axe s'affiche faussement en rouge.
+const _norm = x => String(x||'').toLowerCase().split('/').pop().split(':').pop()
+  .replace(/^\d+-/,'').replace(/[^a-z0-9]/g,'');
+async function loadLogs(){
+  const el = $('#logs-body');
+  el.innerHTML = '<tr><td colspan="4" class="empty">loading…</td></tr>';
+  let j;
+  try{ j = await (await fetch('/api/engine/decisions')).json(); }
+  catch(e){ el.innerHTML = `<tr><td colspan="4"><span class="bad-txt">${e}</span></td></tr>`; return; }
+  if(j.error){ el.innerHTML = `<tr><td colspan="4"><span class="bad-txt">${j.error}</span></td></tr>`; return; }
+  $('#logs-decider').innerHTML = j.decider
+    ? `decider <code>${j.decider}</code>` : '<span class="warn-txt">no decider set — all requests default</span>';
+  $('#logs-default').textContent = j.default_axis || '?';
+  const dec = j.decisions || [];
+  if(!dec.length){
+    el.innerHTML = '<tr><td colspan="4" class="empty">No routing decisions recorded yet — send a few requests through CoeOS, then refresh.</td></tr>';
+    return;
+  }
+  el.innerHTML = '';
+  for(const d of dec){
+    const expected = (j.bindings||{})[d.axis];
+    const mism = expected && _norm(d.model) !== _norm(expected);
+    const bad = mism || d.fallback;
+    const tr = document.createElement('tr');
+    if(bad) tr.className = 'mismatch';
+    tr.innerHTML = `
+      <td class="mono">${d.axis}</td>
+      <td class="mono">${expected||'—'}</td>
+      <td class="mono ${bad?'bad-txt':''}">${d.model}`
+      + (d.fallback?' <span class="pill bad">cold-autoload</span>':'')
+      + (mism?' <span class="pill bad">≠ setting</span>':'')
+      + `</td>
+      <td class="num">${d.count}</td>`;
+    el.appendChild(tr);
+  }
+}
+$('#logs-refresh').onclick = loadLogs;
+
+refresh();
+</script>
+</body>
+</html>
