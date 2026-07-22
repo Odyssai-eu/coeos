@@ -6,8 +6,27 @@ set -e
 DIR="$(cd "$(dirname "$0")" && pwd)"
 BASE="${COEOS_ENGINE_BASE:-http://127.0.0.1:8000/v1}"
 
+# pydantic-ai requires Python >= 3.10; macOS system python3 is often 3.9.
+# Pick the newest suitable interpreter (override with COEOS_PYTHON).
+PY="${COEOS_PYTHON:-}"
+if [ -z "$PY" ]; then
+  for cand in python3.13 python3.12 python3.11 python3.10 python3; do
+    if command -v "$cand" >/dev/null 2>&1 \
+       && "$cand" -c 'import sys; sys.exit(0 if sys.version_info >= (3,10) else 1)'; then
+      PY="$cand"; break
+    fi
+  done
+fi
+if [ -z "$PY" ]; then
+  echo "[coeos] ERROR: no Python >= 3.10 found (tried python3.13..python3.10, python3)."
+  echo "        Install one (e.g. brew install python@3.12 / apt install python3.12)"
+  echo "        or point COEOS_PYTHON at a suitable interpreter."
+  exit 1
+fi
+echo "[coeos] using $PY ($("$PY" -V 2>&1))"
+
 echo "[coeos] creating venv…"
-python3 -m venv "$DIR/v2/.venv"
+"$PY" -m venv "$DIR/v2/.venv"
 "$DIR/v2/.venv/bin/pip" install --quiet --upgrade pip
 "$DIR/v2/.venv/bin/pip" install --quiet -r "$DIR/v2/requirements.txt"
 
