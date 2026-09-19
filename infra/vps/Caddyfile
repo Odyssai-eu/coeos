@@ -1,0 +1,16 @@
+# Caddy — terminaison TLS du SaaS CoeOS (api.coeos.io).
+# Certs Let's Encrypt automatiques. Le service coeos vit sur le meme reseau
+# compose, jamais expose directement — Caddy est la seule porte publique.
+
+api.coeos.io {
+	encode gzip
+	reverse_proxy coeos:4600
+}
+
+# Plan de controle. Protege par le LOGIN de la console elle-meme (mot de passe
+# + cookie). Ne PAS exposer tant que COEOS_CONSOLE_PASSWORD n'est pas defini
+# (sinon la console est ouverte).
+console.coeos.io {
+	encode gzip
+	reverse_proxy console:4800
+}

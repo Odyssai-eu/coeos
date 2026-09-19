@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -d .claude-memory && uv run --directory .claude-memory python hooks/session-start.py || true",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -d .claude-memory && uv run --directory .claude-memory python hooks/pre-compact.py || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -d .claude-memory && uv run --directory .claude-memory python hooks/session-end.py || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
