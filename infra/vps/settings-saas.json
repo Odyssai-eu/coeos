@@ -1,0 +1,109 @@
+{
+ "name": "Eco-1.33 · OR",
+ "regime": "cloud",
+ "updated": "2026-08-01",
+ "note": "Eco-1.33 fidele : les 4 axes Qwen3.8 servis via OR (qwen/qwen3.8-max) au lieu de l'acces Alibaba direct. Decider mercury-2. SaaS public 2026-08-10.",
+ "default_axis": "code_general",
+ "cold_boot_autoload": false,
+ "axes": [
+  {
+   "key": "creative",
+   "label": "Créatif / fiction longue",
+   "model": "moonshotai/kimi-k3"
+  },
+  {
+   "key": "redac_pro",
+   "label": "Rédaction pro / business",
+   "model": "qwen/qwen3.8-max",
+   "bench": ""
+  },
+  {
+   "key": "legal_rgpd",
+   "label": "RGPD / conformité",
+   "model": "xiaomi/mimo-v2.5-pro"
+  },
+  {
+   "key": "legal_complex",
+   "label": "Conformité multi-jur.",
+   "model": "inclusionai/ring-2.6-1t"
+  },
+  {
+   "key": "reasoning",
+   "label": "Raisonnement / logique",
+   "model": "z-ai/glm-5.2"
+  },
+  {
+   "key": "calc",
+   "label": "Calcul / structuré",
+   "model": "z-ai/glm-5.2"
+  },
+  {
+   "key": "python",
+   "label": "Python / scripts",
+   "model": "qwen/qwen3.8-max",
+   "bench": ""
+  },
+  {
+   "key": "code_general",
+   "label": "Code général",
+   "model": "qwen/qwen3.8-max",
+   "bench": ""
+  },
+  {
+   "key": "debug",
+   "label": "Debug",
+   "model": "inclusionai/ling-3.0-flash:free"
+  },
+  {
+   "key": "react",
+   "label": "React / front",
+   "model": "deepseek/deepseek-v4-pro"
+  },
+  {
+   "key": "swift",
+   "label": "Swift",
+   "model": "moonshotai/kimi-k3"
+  },
+  {
+   "key": "refactoring",
+   "label": "Refactoring",
+   "model": "inception/mercury-2"
+  },
+  {
+   "key": "plan_decompo",
+   "label": "Planning — décomposition",
+   "model": "inclusionai/ling-2.6-1t"
+  },
+  {
+   "key": "plan_spec",
+   "label": "Planning — handoff / spec",
+   "model": "openai/o3"
+  },
+  {
+   "key": "plan_judgment",
+   "label": "Planning — jugement / pièges",
+   "model": "qwen/qwen3.8-max",
+   "bench": ""
+  },
+  {
+   "key": "fast_tools",
+   "label": "Tools & fast coding",
+   "model": "inception/mercury-2"
+  },
+  {
+   "key": "agent_exec",
+   "label": "Agent — exécution outillée",
+   "model": "inception/mercury-2"
+  },
+  {
+   "key": "agent_safety",
+   "label": "Agent — discipline / sûreté",
+   "model": "tencent/hy3"
+  }
+ ],
+ "models": {},
+ "decider": {
+  "name": "Mercury-2",
+  "or": "inception/mercury-2"
+ }
+}

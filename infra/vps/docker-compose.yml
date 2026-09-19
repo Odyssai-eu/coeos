@@ -1,0 +1,63 @@
+# Stack VPS CoeOS (S2.3/S2.4). Le service coeos utilise une image PROMUE
+# (docker load), jamais un build sur le VPS : les bytes testes sur nautilus
+# sont les bytes servis. Le tag est epingle dans .env (COEOS_TAG) — rollback =
+# repointer .env et `up`.
+services:
+  coeos:
+    image: coeos:${COEOS_TAG:?set COEOS_TAG in .env (promoted image tag)}
+    container_name: coeos
+    restart: unless-stopped
+    volumes:
+      - coeos_data:/data
+    environment:
+      - COEOS_CONFIG=/data/coeos-config.json
+      - COEOS_AUTH_DB=/data/coeos-auth.db
+      - COEOS_MASTER_KEY=${COEOS_MASTER_KEY:?set COEOS_MASTER_KEY in .env}
+    expose:
+      - "4600"
+
+  # Plan de controle CoeOS (la console : 4 tabs, agents, score-table,
+  # correspondance). PUR stdlib -> python-slim sans build. Rejoint coeos sur
+  # le reseau compose. JAMAIS public : publie sur 127.0.0.1 seulement, accede
+  # par tunnel SSH (ssh -L 4800:localhost:4800 coeos-vps). Il peut CHANGER le
+  # routage — pas de surface internet.
+  console:
+    image: python:3.13-slim
+    container_name: coeos-console
+    restart: unless-stopped
+    depends_on:
+      - coeos
+    # RW : la console persiste son etat (configs sauvees, coeos-agents.json,
+    # score-table synchronisee) dans ce dossier sur le host.
+    volumes:
+      - ./console-app:/app
+    working_dir: /app
+    environment:
+      - COEOS_ENGINE_TOKEN=${COEOS_ADMIN_KEY:?set COEOS_ADMIN_KEY in .env}
+      # Login de la console (plan de controle public). Vide = OUVERT : la
+      # console N'EST exposee par Caddy que si ce mot de passe est defini.
+      - COEOS_CONSOLE_PASSWORD=${COEOS_CONSOLE_PASSWORD:-}
+    command: >
+      python3 console/server.py --port 4800
+      --base http://coeos:4600/v1 --agents-dir /app/agents
+    # Pas de publication host : Caddy (meme reseau) est la seule porte, via
+    # console.coeos.io + le login.
+
+  caddy:
+    image: caddy:2
+    container_name: coeos-caddy
+    restart: unless-stopped
+    depends_on:
+      - coeos
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  coeos_data:
+  caddy_data:
+  caddy_config:

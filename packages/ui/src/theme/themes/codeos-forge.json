@@ -1,0 +1,59 @@
+{
+  "$schema": "https://opencode.ai/desktop-theme.json",
+  "name": "coeos-code Forge",
+  "id": "codeos-forge",
+  "light": {
+    "palette": {
+      "neutral": "#f4f7fb",
+      "ink": "#16283e",
+      "primary": "#0284c7",
+      "accent": "#ea580c",
+      "interactive": "#0891b2",
+      "success": "#059669",
+      "warning": "#d97706",
+      "error": "#dc2626",
+      "info": "#0ea5e9",
+      "diffAdd": "#10b981",
+      "diffDelete": "#ef4444"
+    },
+    "overrides": {
+      "syntax-comment": "#64748b",
+      "syntax-keyword": "#c2410c",
+      "syntax-string": "#15803d",
+      "syntax-primitive": "#b45309",
+      "syntax-property": "#0369a1",
+      "syntax-type": "#0e7490",
+      "syntax-constant": "#7c3aed",
+      "markdown-heading": "#075985",
+      "markdown-link": "#0284c7",
+      "markdown-code": "#c2410c"
+    }
+  },
+  "dark": {
+    "palette": {
+      "neutral": "#0a1522",
+      "ink": "#d8e2ee",
+      "primary": "#38bdf8",
+      "accent": "#f97316",
+      "interactive": "#22d3ee",
+      "success": "#34d399",
+      "warning": "#fbbf24",
+      "error": "#f87171",
+      "info": "#7dd3fc",
+      "diffAdd": "#34d399",
+      "diffDelete": "#f87171"
+    },
+    "overrides": {
+      "syntax-comment": "#64748b",
+      "syntax-keyword": "#f97316",
+      "syntax-string": "#4ade80",
+      "syntax-primitive": "#fbbf24",
+      "syntax-property": "#38bdf8",
+      "syntax-type": "#22d3ee",
+      "syntax-constant": "#c084fc",
+      "markdown-heading": "#38bdf8",
+      "markdown-link": "#22d3ee",
+      "markdown-code": "#f97316"
+    }
+  }
+}
