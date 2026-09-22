@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16456B"/>
+      <stop offset="1" stop-color="#061A2C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#2C7FA8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#2C7FA8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brass" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#E4C275"/>
+      <stop offset="0.5" stop-color="#C79A48"/>
+      <stop offset="1" stop-color="#7C5A22"/>
+    </linearGradient>
+    <linearGradient id="brassDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9C7530"/>
+      <stop offset="1" stop-color="#5C4016"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F0D28A"/>
+      <stop offset="1" stop-color="#8A6426"/>
+    </linearGradient>
+    <radialGradient id="glass" cx="0.4" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#1B6E93"/>
+      <stop offset="0.6" stop-color="#0B3A55"/>
+      <stop offset="1" stop-color="#041B2B"/>
+    </radialGradient>
+  </defs>
+
+  <!-- fond : carré arrondi macOS, profondeur -->
+  <rect x="0" y="0" width="1024" height="1024" rx="228" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1024" height="1024" rx="228" fill="url(#glow)"/>
+
+  <!-- bulles : le clin d'oeil Nemo, discret -->
+  <g fill="none" stroke="#9FE1F5" stroke-width="6" opacity="0.55">
+    <circle cx="768" cy="318" r="16"/>
+    <circle cx="806" cy="254" r="10"/>
+    <circle cx="776" cy="202" r="6"/>
+  </g>
+
+  <!-- corselet (plastron) -->
+  <path d="M232 862 C232 790 372 758 512 758 C652 758 792 790 792 862 L792 900 C792 918 778 930 760 930 L264 930 C246 930 232 918 232 900 Z" fill="url(#brassDark)"/>
+  <path d="M262 862 C262 812 380 786 512 786 C644 786 762 812 762 862 L762 880 L262 880 Z" fill="url(#brass)" opacity="0.9"/>
+  <!-- boulons du corselet -->
+  <g fill="#3A2810">
+    <circle cx="330" cy="836" r="10"/><circle cx="421" cy="818" r="10"/><circle cx="512" cy="812" r="10"/>
+    <circle cx="603" cy="818" r="10"/><circle cx="694" cy="836" r="10"/>
+  </g>
+
+  <!-- bague de cou -->
+  <rect x="352" y="722" width="320" height="52" rx="26" fill="url(#brassDark)"/>
+
+  <!-- valve de tête -->
+  <rect x="474" y="238" width="76" height="56" rx="14" fill="url(#brassDark)"/>
+  <circle cx="512" cy="230" r="28" fill="url(#ring)"/>
+
+  <!-- dôme -->
+  <circle cx="512" cy="520" r="252" fill="url(#brass)"/>
+  <ellipse cx="418" cy="392" rx="86" ry="52" fill="#FFF3D0" opacity="0.22" transform="rotate(-30 418 392)"/>
+
+
+  <!-- hublot frontal -->
+  <circle cx="512" cy="520" r="190" fill="url(#ring)"/>
+  <circle cx="512" cy="520" r="152" fill="url(#glass)"/>
+  <!-- reflet -->
+  <ellipse cx="454" cy="450" rx="58" ry="32" fill="#DFF6FF" opacity="0.32" transform="rotate(-35 454 450)"/>
+  <path d="M392 572 A124 124 0 0 0 574 636" fill="none" stroke="#9FE1F5" stroke-width="9" opacity="0.28" stroke-linecap="round"/>
+  <!-- rivets du hublot -->
+  <g fill="#3A2810">
+    <circle cx="683" cy="520" r="11"/><circle cx="633" cy="641" r="11"/><circle cx="512" cy="691" r="11"/><circle cx="391" cy="641" r="11"/>
+    <circle cx="341" cy="520" r="11"/><circle cx="391" cy="399" r="11"/><circle cx="512" cy="349" r="11"/><circle cx="633" cy="399" r="11"/>
+  </g>
+</svg>

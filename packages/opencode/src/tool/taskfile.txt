@@ -1,0 +1,12 @@
+Manage the durable Task File (task.md) of a CoeOS Mode plan. The Task File is the source of truth for planned work: a checklist of tasks, each with a role, optional points, optional deps, and a status (todo/doing/done/blocked). It lives at .opencode/plans/<sessionID>/task.md and the user may hand-edit it at any time — always re-read before dispatching.
+
+Actions:
+- "plan": create or replace the task list (before or during planning). Tasks keep their status if unchanged. Requires title + tasks.
+- "read": reload the Task File from disk (also recovers orphaned "doing" tasks back to "todo" on first read). Always do this before each dispatch — the user may have edited the file.
+- "approve": ask the user for the global GO (or a mini-GO for tasks added/changed after the initial GO). Only approved tasks can be started. Requires the user to answer; do not proceed without approval.
+- "status": transition one task (doing/done/blocked). Starting a task ("doing") is refused unless the task is approved and all its deps are done. Pass child_session_id and model when dispatching so Mission Control can track the run.
+
+Rules:
+- Statuses are the only thing you may change on existing tasks via "status". To reword or re-scope a task, use "plan" — the task loses its approval and needs a new "approve".
+- A task rejected by the user in "approve" must not be started; drop it or revise it.
+- Never mark a task "done" before its per-task review came back clean.

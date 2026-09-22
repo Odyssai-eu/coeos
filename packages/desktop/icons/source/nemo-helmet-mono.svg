@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- variante monochrome : barre de menus, favicon, badge. currentColor = la couleur du contexte. -->
+  <g fill="none" stroke="currentColor" stroke-width="46" stroke-linecap="round" stroke-linejoin="round" color="#0B2436">
+    <!-- corselet -->
+    <path d="M232 862 C232 790 372 758 512 758 C652 758 792 790 792 862 L792 912 L232 912 Z"/>
+    <!-- bague de cou -->
+    <path d="M352 748 L672 748"/>
+    <!-- valve -->
+    <path d="M474 268 L550 268 M512 268 L512 230"/>
+    <!-- dôme -->
+    <circle cx="512" cy="520" r="252"/>
+    <!-- hublot frontal -->
+    <circle cx="512" cy="520" r="172"/>
+  </g>
+  <!-- reflet, seul aplat -->
+  <ellipse cx="452" cy="448" rx="50" ry="27" fill="#0B2436" opacity="0.35" transform="rotate(-35 452 448)"/>
+</svg>
